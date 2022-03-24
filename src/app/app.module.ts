@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TemporizadorComponent } from './temporizador/temporizador.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TemporizadorComponent
   ],
   imports: [
     BrowserModule,
