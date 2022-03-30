@@ -1,5 +1,10 @@
 <div class="container">
-    <h1>
-        Estou no centro
-    </h1>
+    <div class="container-contdown">
+        <h1>
+           {{temporizador.tempoConvertString}}
+        </h1>
+        <button (click)="inicarContagem()">Iniciar</button>
+        <br>
+        <button (click)="pararContagem()">Stop</button>
+    </div>
 </div>
