@@ -25,7 +25,7 @@ export class TemporizadorComponent implements OnInit {
 
   contagem() {
     var intervalo = interval(1000);
-    var totalSeconds = (1 * 60);
+    var totalSeconds = (25 * 60);
     this.temporizador.tempoTotalMiliSeconds = 1000 * totalSeconds;
 
     intervalo.subscribe( val=> {
@@ -49,7 +49,7 @@ export class TemporizadorComponent implements OnInit {
     let timerApresentationSeconds = ''
 
     timerApresentationSeconds = seconds < 10 ? "0"+seconds.toString() : seconds.toString();
-    timerApresentationMinutes = seconds < 10 ? "0"+minutes.toString() : minutes.toString();
+    timerApresentationMinutes = minutes < 10 ? "0"+minutes.toString() : minutes.toString();
 
     return timerApresentationMinutes + ":" + timerApresentationSeconds;
   }
