@@ -3,8 +3,16 @@
         <h1>
            {{temporizador.tempoConvertString}}
         </h1>
-        <button (click)="inicarContagem()">Iniciar</button>
+        <div *ngIf="contagemIniciada == false">
+            <button (click)="inicarContagem()">Iniciar</button>
+        </div>
         <br>
-        <button (click)="pararContagem()">Stop</button>
+        <div *ngIf="pararCronometro == true">
+            <button (click)="continuarContagem()">Continuar</button>
+        </div>
+        <br>
+        <div *ngIf="pararCronometro == false && contagemIniciada == true ">
+            <button (click)="pararContagem()">Stop</button>
+        </div>
     </div>
 </div>

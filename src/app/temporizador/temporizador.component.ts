@@ -9,9 +9,10 @@ import { Temporizador } from '../model/temporizador';
 })
 export class TemporizadorComponent implements OnInit {
 
-
+  
   temporizador: Temporizador = new Temporizador();
   pararCronometro: Boolean = false;
+  contagemIniciada: Boolean = false;
 
   constructor() { }
 
@@ -20,21 +21,18 @@ export class TemporizadorComponent implements OnInit {
   }
 
   inicarContagem() {
-    console.log("Iniciando contagem!");
+    this.contagemIniciada = true;
+    var totalSeconds = (25 * 60);
+    this.temporizador.tempoTotalMiliSeconds = 1000 * totalSeconds;
     this.contagem();
   }
 
   contagem() {
     var intervalo = interval(1000);
-    var totalSeconds = (25 * 60);
-    this.temporizador.tempoTotalMiliSeconds = 1000 * totalSeconds;
-
     const subscribe = intervalo.subscribe( val=> {
-      
-      console.log("Estou passando pelo cronometro")
-     
+  
       if(this.pararCronometro== false) {
-        this.setTimer(this.temporizador, val); 
+        this.setTimer(val); 
       }
 
       if (this.pararCronometro == true) {
@@ -42,11 +40,10 @@ export class TemporizadorComponent implements OnInit {
       }
     })
     
-
   }
 
 
-  setTimer(temporizador:Temporizador, valueTimer:number) {
+  setTimer(valueTimer:number) {
 
     var totalTime = 0
     totalTime = this.temporizador.tempoTotalMiliSeconds - (valueTimer * 1000);
@@ -55,9 +52,9 @@ export class TemporizadorComponent implements OnInit {
     let seconds = Math.floor((totalTime/ 1000 ) % 60);
     let timerApresentation = this.transformTimerToString(minutes,seconds);
 
-    temporizador.tempoConvertString = timerApresentation;
-    temporizador.tempototalMinutes = minutes;
-    temporizador.tempoTotalSeconds = seconds;
+    this.temporizador.tempoConvertString = timerApresentation;
+    this.temporizador.tempototalMinutes = minutes;
+    this.temporizador.tempoTotalSeconds = seconds;
   }
 
   transformTimerToString(minutes:number, seconds:number) : string {
@@ -72,7 +69,17 @@ export class TemporizadorComponent implements OnInit {
 
   pararContagem() {
     this.pararCronometro = true;
-    console.log("Parando")
+    console.log(this.temporizador.tempototalMinutes);
+    console.log(this.temporizador.tempoTotalSeconds);
+    console.log(this.temporizador.tempoTotalMiliSeconds);
+  }
+
+  continuarContagem() {
+    console.log("voltandoContagem")
+    this.pararCronometro = false
+    this.contagemIniciada = true
+    console.log(this.temporizador.tempoTotalMiliSeconds)
+   // Vai ter que voltar a contagem
   }
 
 }
