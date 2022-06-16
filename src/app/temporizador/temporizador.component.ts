@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { Temporizador } from '../model/temporizador';
 
 @Component({
@@ -11,6 +11,7 @@ export class TemporizadorComponent implements OnInit {
 
 
   temporizador: Temporizador = new Temporizador();
+  pararCronometro: Boolean = false;
 
   constructor() { }
 
@@ -29,19 +30,27 @@ export class TemporizadorComponent implements OnInit {
     this.temporizador.tempoTotalMiliSeconds = 1000 * totalSeconds;
 
     intervalo.subscribe( val=> {
-      var tempoTotal = 0
-      tempoTotal = this.temporizador.tempoTotalMiliSeconds - (val * 1000);
-      this.temporizador.tempoConvertString =  this.convertTimerSeconds(tempoTotal);
+      if(this.pararCronometro== false) {
+        this.setTimer(this.temporizador, val); 
+      } 
     })
+
 
   }
 
 
-  convertTimerSeconds(tempoTotal:number): string {
-    let minutes = Math.floor((tempoTotal / 1000)/60);
-    let seconds = Math.floor((tempoTotal/ 1000 ) % 60);
+  setTimer(temporizador:Temporizador, valueTimer:number) {
+
+    var totalTime = 0
+    totalTime = this.temporizador.tempoTotalMiliSeconds - (valueTimer * 1000);
+
+    let minutes = Math.floor((totalTime / 1000)/60);
+    let seconds = Math.floor((totalTime/ 1000 ) % 60);
     let timerApresentation = this.transformTimerToString(minutes,seconds);
-    return timerApresentation;
+
+    temporizador.tempoConvertString = timerApresentation;
+    temporizador.tempototalMinutes = minutes;
+    temporizador.tempoTotalSeconds = seconds;
   }
 
   transformTimerToString(minutes:number, seconds:number) : string {
@@ -55,7 +64,8 @@ export class TemporizadorComponent implements OnInit {
   }
 
   pararContagem() {
-    console.log("Parando")
+    this.pararCronometro = true;
+    console.log("Parado")
   }
 
 }
