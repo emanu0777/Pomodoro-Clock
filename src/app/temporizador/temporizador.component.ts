@@ -29,12 +29,19 @@ export class TemporizadorComponent implements OnInit {
     var totalSeconds = (25 * 60);
     this.temporizador.tempoTotalMiliSeconds = 1000 * totalSeconds;
 
-    intervalo.subscribe( val=> {
+    const subscribe = intervalo.subscribe( val=> {
+      
+      console.log("Estou passando pelo cronometro")
+     
       if(this.pararCronometro== false) {
         this.setTimer(this.temporizador, val); 
-      } 
-    })
+      }
 
+      if (this.pararCronometro == true) {
+        setTimeout(()=> subscribe.unsubscribe(), 2000)
+      }
+    })
+    
 
   }
 
@@ -65,7 +72,7 @@ export class TemporizadorComponent implements OnInit {
 
   pararContagem() {
     this.pararCronometro = true;
-    console.log("Parado")
+    console.log("Parando")
   }
 
 }
