@@ -36,6 +36,7 @@ export class TemporizadorComponent implements OnInit {
       }
 
       if (this.pararCronometro == true) {
+        this.temporizador.tempoTotalMiliSeconds = this.temporizador.tempoRestanteMiliSeconds;
         setTimeout(()=> subscribe.unsubscribe(), 2000)
       }
     })
@@ -55,6 +56,7 @@ export class TemporizadorComponent implements OnInit {
     this.temporizador.tempoConvertString = timerApresentation;
     this.temporizador.tempototalMinutes = minutes;
     this.temporizador.tempoTotalSeconds = seconds;
+    this.temporizador.tempoRestanteMiliSeconds = totalTime;
   }
 
   transformTimerToString(minutes:number, seconds:number) : string {
@@ -69,17 +71,12 @@ export class TemporizadorComponent implements OnInit {
 
   pararContagem() {
     this.pararCronometro = true;
-    console.log(this.temporizador.tempototalMinutes);
-    console.log(this.temporizador.tempoTotalSeconds);
-    console.log(this.temporizador.tempoTotalMiliSeconds);
   }
 
   continuarContagem() {
-    console.log("voltandoContagem")
-    this.pararCronometro = false
-    this.contagemIniciada = true
-    console.log(this.temporizador.tempoTotalMiliSeconds)
-   // Vai ter que voltar a contagem
+    this.pararCronometro = false;
+    this.contagemIniciada = true;
+   this.contagem();
   }
 
 }

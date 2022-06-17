@@ -3,7 +3,8 @@ export class Temporizador {
     tempototalMinutes: number;
     tempoTotalSeconds:number;
     tempoTotalIntervalo: number;
-    tempoConvertString: string
+    tempoConvertString: string;
+    tempoRestanteMiliSeconds:number;
 
 
     constructor() {
@@ -12,5 +13,6 @@ export class Temporizador {
         this.tempoTotalSeconds=0;
         this.tempoTotalIntervalo=0;
         this.tempoConvertString='';
+        this.tempoRestanteMiliSeconds=0;
     }
 }
