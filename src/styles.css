@@ -1,3 +1,4 @@
 html {
-    background-color:#429ECB;
+    background: linear-gradient(to top right, #ED8768, #3023AE, #0ff);
+    background-attachment: fixed;
 }
